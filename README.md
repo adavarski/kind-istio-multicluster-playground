@@ -84,7 +84,8 @@ Example Output:
    ⠿ [remote2] Configured as Istio remote
 ```
 
-### Verify the installation
+### Verify the installation 
+Ref: https://istio.io/latest/docs/setup/install/multicluster/verify/
 ```
 $ kubectl config get-contexts 
 CURRENT   NAME            CLUSTER         AUTHINFO        NAMESPACE
