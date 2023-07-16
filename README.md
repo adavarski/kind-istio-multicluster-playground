@@ -242,5 +242,5 @@ $ kind delete cluster --name=remote1
 Deleting cluster "remote1" ...
 $ kind delete cluster --name=remote2
 Deleting cluster "remote2" .
-`
-### [Thanks](https://github.com/antoineco/istio-lab)``
+```
+### [Thanks](https://github.com/antoineco/istio-lab)
