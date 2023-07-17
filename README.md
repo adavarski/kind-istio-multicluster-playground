@@ -236,6 +236,74 @@ Hello version: v1, instance: helloworld-v1-78b9f5c87f-bk578
 
 ```
 
+Note: ArgoCD on primary1
+```
+$ kubectl config use-context kind-remote1
+Switched to context "kind-remote1".
+$ kubectl get endpoints
+NAME         ENDPOINTS         AGE
+kubernetes   172.18.0.3:6443   22m
+$ kubectl config use-context kind-remote2
+Switched to context "kind-remote2".
+$ kubectl get endpoints
+NAME         ENDPOINTS         AGE
+kubernetes   172.18.0.4:6443   23m
+$ kubectl config use-context kind-primary1
+Switched to context "kind-primary1".
+$ kubectl get endpoints
+NAME         ENDPOINTS         AGE
+kubernetes   172.18.0.2:6443   23m
+
+
+$ diff ~/.kube/config ~/.kube/config.ORIG
+5c5
+<     server: https://172.18.0.2:6443
+---
+>     server: https://127.0.0.1:36691
+9c9
+<     server: https://172.18.0.3:6443
+---
+>     server: https://127.0.0.1:35169
+13c13
+<     server: https://172.18.0.4:6443
+---
+>     server: https://127.0.0.1:37795
+
+export CTX_CLUSTER1=kind-remote1
+export CTX_CLUSTER2=kind-remote2
+export CTX_CLUSTERHUB=kind-primary1
+
+kubectl --context="${CTX_CLUSTERHUB}" create namespace argocd
+kubectl --context="${CTX_CLUSTERHUB}" apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+
+kubectl config use-context kind-primary1
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+ARGOHUB=$(kubectl get svc argocd-server -n argocd -o json | jq -r .status.loadBalancer.ingress\[\].ip)
+
+argocd login $ARGOHUB --insecure -grpc-web
+
+$ argocd cluster add $CTX_CLUSTER1
+WARNING: This will create a service account `argocd-manager` on the cluster referenced by context `kind-remote1` with full cluster level privileges. Do you want to continue [y/N]? y
+INFO[0001] ServiceAccount "argocd-manager" already exists in namespace "kube-system" 
+INFO[0001] ClusterRole "argocd-manager-role" updated    
+INFO[0001] ClusterRoleBinding "argocd-manager-role-binding" updated 
+Cluster 'https://172.18.0.3:6443' added
+$ argocd cluster add $CTX_CLUSTER2
+WARNING: This will create a service account `argocd-manager` on the cluster referenced by context `kind-remote2` with full cluster level privileges. Do you want to continue [y/N]? y
+INFO[0001] ServiceAccount "argocd-manager" already exists in namespace "kube-system" 
+INFO[0001] ClusterRole "argocd-manager-role" updated    
+INFO[0001] ClusterRoleBinding "argocd-manager-role-binding" updated 
+Cluster 'https://172.18.0.4:6443' added
+$ argocd cluster list
+SERVER                          NAME          VERSION  STATUS   MESSAGE                                                  PROJECT
+https://172.18.0.3:6443         kind-remote1           Unknown  Cluster has no applications and is not being monitored.  
+https://172.18.0.4:6443         kind-remote2           Unknown  Cluster has no applications and is not being monitored.  
+https://kubernetes.default.svc  in-cluster             Unknown  Cluster has no applications and is not being monitored. 
+
+```
+
+
 ### Clean local environment
 ```
 $ kind delete cluster --name=primary1
