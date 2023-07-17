@@ -38,6 +38,8 @@ Istiod (pilot), in the primary cluster, is exposed to remote clusters over an Is
 Kubernetes Service of type LoadBalancer.
 The IP address of this Service is assigned and advertised by [MetalLB](https://metallb.universe.tf/) (L2 mode).
 
+Ref: https://istio.io/latest/docs/setup/install/multicluster/primary-remote/
+
 Example Output:
 
 ```
