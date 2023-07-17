@@ -319,13 +319,15 @@ https://kubernetes.default.svc  in-cluster              Unknown     Cluster has 
 
 Screenshots:
 
-<img src="screenshots/ArgoCD-UI-remote-apps.png?raw=true" width="800">
+<img src="screenshots/ArgoCD-UI-remote-apps.png?raw=true" width="1000">
 
-<img src="screenshots/ArgoCD-UI-remote-Clusters.png?raw=true" width="800">
+<img src="screenshots/ArgoCD-UI-remote-Clusters.png?raw=true" width="1000">
 
 
 
 ### TODO2: ArgoCD Rollouts  & Upgrade Application with Argo Rollouts (Canary Deploy)
+
+Ref: https://github.com/edubonifs/multicluster-canary
 
 ### TODO3: Deploy the monitoring stack (Prometheus Operator on Workload Clusters + Install and Configure Thanos)
 
