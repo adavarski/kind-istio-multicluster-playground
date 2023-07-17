@@ -281,7 +281,7 @@ kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ARGOHUB=$(kubectl get svc argocd-server -n argocd -o json | jq -r .status.loadBalancer.ingress\[\].ip)
 
-argocd login $ARGOHUB --insecure -grpc-web
+argocd login $ARGOHUB --insecure --grpc-web
 
 $ argocd cluster add $CTX_CLUSTER1
 WARNING: This will create a service account `argocd-manager` on the cluster referenced by context `kind-remote1` with full cluster level privileges. Do you want to continue [y/N]? y
