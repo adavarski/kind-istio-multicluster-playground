@@ -313,7 +313,7 @@ https://kubernetes.default.svc  in-cluster             Unknown  Cluster has no a
 
 ### TODO3: Deploy the monitoring stack (Prometheus Operator on Workload Clusters + Install and Configure Thanos)
 
-### Clean local environment
+## Clean local environment
 ```
 $ kind delete cluster --name=primary1
 Deleting cluster "primary1" ...
@@ -322,4 +322,4 @@ Deleting cluster "remote1" ...
 $ kind delete cluster --name=remote2
 Deleting cluster "remote2" .
 ```
-### [Thanks](https://github.com/antoineco/istio-lab)
+## [Thanks](https://github.com/antoineco/istio-lab)
