@@ -236,7 +236,7 @@ Hello version: v1, instance: helloworld-v1-78b9f5c87f-bk578
 
 ```
 
-Note: ArgoCD on primary1
+### ArgoCD on primary1
 ```
 $ kubectl config use-context kind-remote1
 Switched to context "kind-remote1".
