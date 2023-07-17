@@ -317,6 +317,14 @@ https://172.18.0.4:6443         kind-remote2  1.25     Successful
 https://kubernetes.default.svc  in-cluster              Unknown     Cluster has no applications and is not being monitored.  
 ```
 
+Screenshots:
+
+<img src="screenshots/ArgoCD-UI-remote-apps.png?raw=true" width="800">
+
+<img src="screenshots/ArgoCD-UI-remote-Clusters.png?raw=true" width="800">
+
+
+
 ### TODO2: ArgoCD Rollouts  & Upgrade Application with Argo Rollouts (Canary Deploy)
 
 ### TODO3: Deploy the monitoring stack (Prometheus Operator on Workload Clusters + Install and Configure Thanos)
