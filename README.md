@@ -42,7 +42,7 @@ Ref: https://istio.io/latest/docs/setup/install/multicluster/primary-remote/
 
 Architecture: primary-remote
 
-<img src="screenshots/arch-primary-remout.svg?raw=true" width="800">
+<img src="screenshots/arch-primary-remote.svg?raw=true" width="800">
 
 
 Example Output:
