@@ -40,6 +40,11 @@ The IP address of this Service is assigned and advertised by [MetalLB](https://m
 
 Ref: https://istio.io/latest/docs/setup/install/multicluster/primary-remote/
 
+Architecture: primary-remote
+
+<img src="arch.svg?raw=true" width="1000">
+
+
 Example Output:
 
 ```
