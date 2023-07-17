@@ -241,7 +241,10 @@ Hello version: v1, instance: helloworld-v1-78b9f5c87f-bk578
 
 ```
 
-### ArgoCD on primary1
+### TODO1: Setup a multi-cluster environment with Istio and Kiali (Experimental support)
+
+
+### TODO2: ArgoCD + ArgoCD Rollouts  & Upgrade Application with Argo Rollouts (Canary Deploy)
 ```
 $ kubectl config use-context kind-remote1
 Switched to context "kind-remote1".
@@ -308,6 +311,7 @@ https://kubernetes.default.svc  in-cluster             Unknown  Cluster has no a
 
 ```
 
+### TODO3: Deploy the monitoring stack (Prometheus Operator on Workload Clusters + Install and Configure Thanos)
 
 ### Clean local environment
 ```
