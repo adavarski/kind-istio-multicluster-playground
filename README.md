@@ -285,7 +285,7 @@ kubectl --context="${CTX_CLUSTERHUB}" create namespace argocd
 kubectl --context="${CTX_CLUSTERHUB}" apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
 kubectl config use-context kind-primary1
-kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}
+kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ARGOHUB=$(kubectl get svc argocd-server -n argocd -o json | jq -r .status.loadBalancer.ingress\[\].ip)
 
