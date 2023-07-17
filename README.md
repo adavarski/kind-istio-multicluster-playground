@@ -241,10 +241,10 @@ Hello version: v1, instance: helloworld-v1-78b9f5c87f-bk578
 
 ```
 
-### TODO1: Setup a multi-cluster environment with Istio and Kiali (Experimental support)
+### TODO1: Setup Kiali for Istio mullticluster primary-remote environment (Note: Kiali -> Experimental support)
 
 
-### TODO2: ArgoCD + ArgoCD Rollouts  & Upgrade Application with Argo Rollouts (Canary Deploy)
+### ArgoCD 
 ```
 $ kubectl config use-context kind-remote1
 Switched to context "kind-remote1".
@@ -303,13 +303,17 @@ INFO[0001] ServiceAccount "argocd-manager" already exists in namespace "kube-sys
 INFO[0001] ClusterRole "argocd-manager-role" updated    
 INFO[0001] ClusterRoleBinding "argocd-manager-role-binding" updated 
 Cluster 'https://172.18.0.4:6443' added
-$ argocd cluster list
-SERVER                          NAME          VERSION  STATUS   MESSAGE                                                  PROJECT
-https://172.18.0.3:6443         kind-remote1           Unknown  Cluster has no applications and is not being monitored.  
-https://172.18.0.4:6443         kind-remote2           Unknown  Cluster has no applications and is not being monitored.  
-https://kubernetes.default.svc  in-cluster             Unknown  Cluster has no applications and is not being monitored. 
 
+### ### Add demo-remote1 & demo_remote2 apps via ArgoUI: Browser -> http://172.18.0.4 (Repo URL: https://github.com/adavarski/ArgoCD-GitOps-playground, Path: helm, Cluster destination: remote1 & remote2, Namespace: default)
+
+$ argocd cluster list
+SERVER                          NAME           VERSION  STATUS      MESSAGE                                                  PROJECT
+https://172.18.0.3:6443         kind-remote1  1.25     Successful                                                           
+https://172.18.0.4:6443         kind-remote2  1.25     Successful                                                           
+https://kubernetes.default.svc  in-cluster              Unknown     Cluster has no applications and is not being monitored.  
 ```
+
+### TODO2: ArgoCD Rollouts  & Upgrade Application with Argo Rollouts (Canary Deploy)
 
 ### TODO3: Deploy the monitoring stack (Prometheus Operator on Workload Clusters + Install and Configure Thanos)
 
