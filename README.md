@@ -42,7 +42,7 @@ Ref: https://istio.io/latest/docs/setup/install/multicluster/primary-remote/
 
 Architecture: primary-remote
 
-<img src="arch.svg?raw=true" width="800">
+<img src="screenshots/arch-primary-remout.svg?raw=true" width="800">
 
 
 Example Output:
@@ -245,6 +245,10 @@ Hello version: v1, instance: helloworld-v1-78b9f5c87f-bk578
 
 
 ### ArgoCD setup
+
+<img src="screenshots/ArgoFlow.png?raw=true" width="800">
+
+
 ```
 $ kubectl config use-context kind-remote1
 Switched to context "kind-remote1".
