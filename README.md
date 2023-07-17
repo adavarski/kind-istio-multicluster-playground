@@ -244,7 +244,7 @@ Hello version: v1, instance: helloworld-v1-78b9f5c87f-bk578
 ### TODO1: Setup Kiali for Istio mullticluster primary-remote environment (Note: Kiali -> Experimental support)
 
 
-### ArgoCD 
+### ArgoCD setup
 ```
 $ kubectl config use-context kind-remote1
 Switched to context "kind-remote1".
@@ -326,4 +326,6 @@ Deleting cluster "remote1" ...
 $ kind delete cluster --name=remote2
 Deleting cluster "remote2" .
 ```
-## [Thanks](https://github.com/antoineco/istio-lab)
+### Thanks
+- https://github.com/antoineco/istio-lab
+- https://github.com/edubonifs/multicluster-canary
