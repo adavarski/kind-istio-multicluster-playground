@@ -245,6 +245,10 @@ Hello version: v1, instance: helloworld-v1-78b9f5c87f-bk578
 
 Ref: https://kiali.io/docs/configuration/multi-cluster/ 
 
+Kiali v1.69 includes experimental support for multi-cluster, which allows to have Kiali with Istio Mesh installed across multiple Kubernetes clusters. It is now possible to
+visualize multiple workloads in the same graph from different clusters, as well as the workload’s health, the services, the applications and the Istio configurations, from the
+same Kiali instance.
+
 Note: Support for multi-cluster deployments is currently experimental and subject to change. Only the primary-remote istio deployment is currently supported.
 
 <img src="screenshots/multi-cluster-kiali.png?raw=true" width="800">
