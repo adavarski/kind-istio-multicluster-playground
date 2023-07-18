@@ -354,6 +354,61 @@ Screenshots:
 Ref: https://github.com/edubonifs/multicluster-canary
 
 ### TODO3: Deploy the monitoring stack (Prometheus Operator on Workload Clusters + Install and Configure Thanos)
+```
+We will deploy one Prometheus Operator for each workload cluster. In each workload cluster we will change the externalLabel of the cluster, so for workload remote1 we can use data-producer-1 and for workload remote2 we can use data-producer-2
+
+
+helm repo add bitnami https://charts.bitnami.com/bitnami
+
+kubectl config use-context kind-remote1
+
+helm install prometheus-operator \
+  --set prometheus.thanos.create=true \
+  --set operator.service.type=ClusterIP \
+  --set prometheus.service.type=ClusterIP \
+  --set alertmanager.service.type=ClusterIP \
+  --set prometheus.thanos.service.type=LoadBalancer \
+  --set prometheus.externalLabels.cluster="data-producer-1" \
+  bitnami/kube-prometheus
+
+kubectl config use-context kind-remote2
+
+helm install prometheus-operator \
+  --set prometheus.thanos.create=true \
+  --set operator.service.type=ClusterIP \
+  --set prometheus.service.type=ClusterIP \
+  --set alertmanager.service.type=ClusterIP \
+  --set prometheus.thanos.service.type=LoadBalancer \
+  --set prometheus.externalLabels.cluster="data-producer-2" \
+  bitnami/kube-prometheus
+
+$ kubectl config use-context kind-primary1
+
+$ kubectl create ns monitoring
+
+$ cd thanos
+$ helm install thanos bitnami/thanos -n monitoring --values values.yaml
+kubectl  get secret -n monitoring thanos-minio -o yaml -o jsonpath={.data.root-password} | base64 -d
+
+helm install grafana bitnami/grafana \
+  --set service.type=LoadBalancer \
+  --set admin.password=admin --namespace monitoring
+
+Access Grafana from the UI (load-balancer IP) and add Prometheus as Data Source with the following URL:
+
+http://thanos-query.monitoring.svc.cluster.local:9090
+
+Ading the open source istio grafana dashboards, if you import them at this moment you won't be able to see any metrics, but when you complete next step, you can come back and test.
+
+Add PodMonitor and ServiceMonitor to scrape Istio Metrics
+
+You just have to apply the yaml in both workload clusters in the namespace in which the Prometheus Operator is running:
+$ kubectl apply -f monitor.yaml --context=kind-remote1
+$ kubectl apply -f monitor.yaml --context=kind-remote2
+
+```
+
+
 
 ## Clean local environment
 ```
