@@ -390,7 +390,7 @@ $ kubectl config use-context kind-primary1
 
 $ kubectl create ns monitoring
 
-$ cd thanos
+$ cd monitoring
 $ helm install thanos bitnami/thanos -n monitoring --values values.yaml
 kubectl  get secret -n monitoring thanos-minio -o yaml -o jsonpath={.data.root-password} | base64 -d
 
