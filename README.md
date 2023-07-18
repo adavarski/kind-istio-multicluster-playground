@@ -314,7 +314,7 @@ INFO[0001] ClusterRole "argocd-manager-role" updated
 INFO[0001] ClusterRoleBinding "argocd-manager-role-binding" updated 
 Cluster 'https://172.18.0.4:6443' added
 
-### ### Add demo-remote1 & demo_remote2 apps via ArgoUI: Browser -> http://172.18.0.2 (Repo URL: https://github.com/adavarski/ArgoCD-GitOps-playground, Path: helm, Cluster destination: remote1 & remote2, Namespace: default)
+### Add demo-remote1 & demo_remote2 apps via ArgoUI: Browser -> http://172.18.0.2 (Repo URL: https://github.com/adavarski/ArgoCD-GitOps-playground, Path: helm, Cluster destination: remote1 & remote2, Namespace: default)
 
 $ argocd cluster list
 SERVER                          NAME           VERSION  STATUS      MESSAGE                                                  PROJECT
