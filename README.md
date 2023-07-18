@@ -260,7 +260,9 @@ chmod +x kiali-prepare-remote-cluster.sh
 ./kiali-prepare-remote-cluster.sh --kiali-cluster-context kind-primary1 --remote-cluster-context kind-remote2 --view-only false
 
 kubectl config use-context kind-primary1
-helm upgrade --install --namespace istio-system --set kubernetes_config.cache_enabled=false --set auth.strategy=anonymous --set deployment.logger.log_level=debug --set deployment.ingress.enabled=true --repo https://kiali.org/helm-charts kiali-server kiali-server
+kubectl apply -f istio-1.18.1/samples/addons/kiali.yaml
+
+Note(from helm chart example): helm upgrade --install --namespace istio-system --set kubernetes_config.cache_enabled=false --set auth.strategy=anonymous --set deployment.logger.log_level=debug --set deployment.ingress.enabled=true --repo https://kiali.org/helm-charts kiali-server kiali-server
 ```
 
 
