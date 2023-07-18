@@ -243,6 +243,12 @@ Hello version: v1, instance: helloworld-v1-78b9f5c87f-bk578
 
 ### TODO1: Setup Kiali for Istio mullticluster primary-remote environment (Note: Kiali -> Experimental support)
 
+Ref: https://kiali.io/docs/configuration/multi-cluster/ 
+
+Note: Support for multi-cluster deployments is currently experimental and subject to change. Only the primary-remote istio deployment is currently supported.
+
+<img src="screenshots/multi-cluster-kiali.png?raw=true" width="800">
+
 
 ### ArgoCD setup
 
