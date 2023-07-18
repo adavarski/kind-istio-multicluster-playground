@@ -254,12 +254,15 @@ Note: Support for multi-cluster deployments is currently experimental and subjec
 <img src="screenshots/multi-cluster-kiali.png?raw=true" width="800">
 
 ```
+
 curl -L -o kiali-prepare-remote-cluster.sh https://raw.githubusercontent.com/kiali/kiali/master/hack/istio/multicluster/kiali-prepare-remote-cluster.sh
 chmod +x kiali-prepare-remote-cluster.sh
+
+kubectl config use-context kind-primary1
+
 ./kiali-prepare-remote-cluster.sh --kiali-cluster-context kind-primary1 --remote-cluster-context kind-remote1 --view-only false
 ./kiali-prepare-remote-cluster.sh --kiali-cluster-context kind-primary1 --remote-cluster-context kind-remote2 --view-only false
 
-kubectl config use-context kind-primary1
 kubectl apply -f istio-1.18.1/samples/addons/kiali.yaml
 
 Note(from helm chart example): helm upgrade --install --namespace istio-system --set kubernetes_config.cache_enabled=false --set auth.strategy=anonymous --set deployment.logger.log_level=debug --set deployment.ingress.enabled=true --repo https://kiali.org/helm-charts kiali-server kiali-server
