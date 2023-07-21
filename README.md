@@ -395,10 +395,56 @@ $ cd monitoring
 $ helm install thanos bitnami/thanos -n monitoring --values values.yaml
 kubectl  get secret -n monitoring thanos-minio -o yaml -o jsonpath={.data.root-password} | base64 -d
 
-Substitute this password by KEY in your values.yaml file, and upgrade the helm chart:
+Substitute this password by KEY (secret_key: KEY)  in your values.yaml file, and upgrade the helm chart:
 
 helm upgrade thanos bitnami/thanos -n monitoring \
   --values values.yaml
+
+$ kubectl get all -n monitoring
+NAME                                         READY   STATUS    RESTARTS   AGE
+pod/grafana-6d5659bd7-bqdff                  1/1     Running   0          9m2s
+pod/thanos-bucketweb-6b79d9c86-bgh6z         1/1     Running   0          113s
+pod/thanos-compactor-57c8dcf995-smjjn        1/1     Running   0          107s
+pod/thanos-minio-6845bff58f-fqrz4            1/1     Running   0          7m51s
+pod/thanos-query-6594899b55-kwvjc            1/1     Running   0          14m
+pod/thanos-query-frontend-77c9cf464f-xlsxx   1/1     Running   0          14m
+pod/thanos-ruler-0                           1/1     Running   0          106s
+pod/thanos-storegateway-0                    1/1     Running   0          49s
+
+NAME                            TYPE           CLUSTER-IP      EXTERNAL-IP     PORT(S)              AGE
+service/grafana                 LoadBalancer   10.255.10.139   172.29.255.10   3000:30985/TCP       9m2s
+service/thanos-bucketweb        ClusterIP      10.255.10.115   <none>          8080/TCP             14m
+service/thanos-compactor        ClusterIP      10.255.10.129   <none>          9090/TCP             14m
+service/thanos-minio            ClusterIP      10.255.10.102   <none>          9000/TCP,9001/TCP    14m
+service/thanos-query            ClusterIP      10.255.10.61    <none>          9090/TCP             14m
+service/thanos-query-frontend   ClusterIP      10.255.10.55    <none>          9090/TCP             14m
+service/thanos-query-grpc       ClusterIP      10.255.10.225   <none>          10901/TCP            14m
+service/thanos-ruler            ClusterIP      10.255.10.224   <none>          9090/TCP,10901/TCP   14m
+service/thanos-storegateway     ClusterIP      10.255.10.46    <none>          9090/TCP,10901/TCP   14m
+
+NAME                                    READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/grafana                 1/1     1            1           9m2s
+deployment.apps/thanos-bucketweb        1/1     1            1           14m
+deployment.apps/thanos-compactor        1/1     1            1           14m
+deployment.apps/thanos-minio            1/1     1            1           14m
+deployment.apps/thanos-query            1/1     1            1           14m
+deployment.apps/thanos-query-frontend   1/1     1            1           14m
+
+NAME                                               DESIRED   CURRENT   READY   AGE
+replicaset.apps/grafana-6d5659bd7                  1         1         1       9m2s
+replicaset.apps/thanos-bucketweb-6b79d9c86         1         1         1       113s
+replicaset.apps/thanos-bucketweb-9cb6446b5         0         0         0       14m
+replicaset.apps/thanos-compactor-57c8dcf995        1         1         1       107s
+replicaset.apps/thanos-compactor-6b7cf9cd          0         0         0       14m
+replicaset.apps/thanos-minio-5bf4fc86f6            0         0         0       14m
+replicaset.apps/thanos-minio-6845bff58f            1         1         1       7m51s
+replicaset.apps/thanos-query-6594899b55            1         1         1       14m
+replicaset.apps/thanos-query-frontend-77c9cf464f   1         1         1       14m
+
+NAME                                   READY   AGE
+statefulset.apps/thanos-ruler          1/1     14m
+statefulset.apps/thanos-storegateway   1/1     14m
+
 
 helm install grafana bitnami/grafana \
   --set service.type=LoadBalancer \
