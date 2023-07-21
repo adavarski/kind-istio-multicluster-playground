@@ -387,8 +387,7 @@ helm install prometheus-operator \
   bitnami/kube-prometheus
 
 
-$ ubectl config use-context kind-argohub
-$ kubectl create ns monitoring
+$ kubectl config use-context kind-argohub
 $ kubectl create ns monitoring
 
 $ cd monitoring
