@@ -394,6 +394,11 @@ $ cd monitoring
 $ helm install thanos bitnami/thanos -n monitoring --values values.yaml
 kubectl  get secret -n monitoring thanos-minio -o yaml -o jsonpath={.data.root-password} | base64 -d
 
+Substitute this password by KEY in your values.yaml file, and upgrade the helm chart:
+
+helm upgrade thanos bitnami/thanos -n monitoring \
+  --values values.yaml
+
 helm install grafana bitnami/grafana \
   --set service.type=LoadBalancer \
   --set admin.password=admin --namespace monitoring
