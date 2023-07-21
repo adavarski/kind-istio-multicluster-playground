@@ -386,8 +386,9 @@ helm install prometheus-operator \
   --set prometheus.externalLabels.cluster="data-producer-2" \
   bitnami/kube-prometheus
 
-$ kubectl config use-context kind-primary1
 
+$ ubectl config use-context kind-argohub
+$ kubectl create ns monitoring
 $ kubectl create ns monitoring
 
 $ cd monitoring
