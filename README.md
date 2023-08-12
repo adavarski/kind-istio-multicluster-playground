@@ -59,8 +59,11 @@ Example Output:
    ⠿ [remote1] Route to 10.30.0.0/24 added
    ⠿ [remote2] Route to 10.10.0.0/24 added
    ⠿ [remote2] Route to 10.20.0.0/24 added
-[+] Deploying MetalLB inside primary
+[+] Deploying MetalLB inside clusters
    ⠿ [primary1] MetalLB deployed
+   ⠿ [remote1] MetalLB deployed
+   ⠿ [remote2] MetalLB deployed
+
 [+] Deploying Istio
      
      - Processing resources for Istio core.
