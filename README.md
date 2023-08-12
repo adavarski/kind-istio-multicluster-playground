@@ -387,6 +387,7 @@ helm install prometheus-operator \
   bitnami/kube-prometheus
 
 
+TODO (Note): Need to install MetalLB on remote1 & remote2 for LoadBalancers (Pending currently)
 $ kubectl config use-context kind-remote1
 $ kubectl get svc --all-namespaces|grep thanos
 default          prometheus-operator-kube-p-prometheus-thanos         LoadBalancer   10.255.20.171   172.19.255.30   10901:30621/TCP                102m
