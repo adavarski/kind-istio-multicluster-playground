@@ -32,12 +32,14 @@ declare -A cluster_remote1=(
   [name]=remote1
   [pod_subnet]=10.20.0.0/16
   [svc_subnet]=10.255.20.0/24
+  [metallb_l2pool_start]=30
 )
 
 declare -A cluster_remote2=(
   [name]=remote2
   [pod_subnet]=10.30.0.0/16
   [svc_subnet]=10.255.30.0/24
+  [metallb_l2pool_start]=50
 )
 
 #--------------------------------------
@@ -84,9 +86,12 @@ kind::cluster::add_route ${cluster_remote2[name]}  ${remote1_cidr}  ${remote1_ip
 
 # Deploy MetalLB
 
-log::msg "Deploying MetalLB inside primary"
+log::msg "Deploying MetalLB inside clusters"
 
 metallb::deploy ${cluster_primary1[name]} ${cluster_primary1[metallb_l2pool_start]}
+metallb::deploy ${cluster_remote1[name]} ${cluster_remote1[metallb_l2pool_start]}
+metallb::deploy ${cluster_remote2[name]} ${cluster_remote2[metallb_l2pool_start]}
+
 
 # Deploy Istio
 
